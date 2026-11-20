@@ -1,0 +1,19 @@
+export interface Task {
+ schemaVersion:1;
+ id:string;
+ ege:number;
+ part:1|2;
+ topic:string;
+ subtopic:string;
+ level:1|2|3;
+ prompt:string;
+ formula:string;
+ inputFormat:'decimal'|'expression'|'roots'|'set';
+ answer:string;
+ steps:string[];
+ hints:string[];
+ lessons:string[];
+ figure:null|{kind:'graph'|'diagram';model?:string;data:unknown};
+ provenance:{kind:'authored';description:string;reference:string};
+ rubric:null|{maxPoints:number;focus:string;reference:string};
+}

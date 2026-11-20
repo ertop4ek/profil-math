@@ -1,0 +1,3 @@
+import {notFound} from 'next/navigation';
+export async function generateMetadata({params}:{params:Promise<{path:string[]}>}){const{path}=await params;const titles:Record<string,string>={bank:'Банк заданий',practice:'Тренировка',lessons:'Как решать',methods:'Памятки',progress:'Мой прогресс',saved:'Избранное',about:'О тренажёре'};return {title:titles[path[0]]||'Страница не найдена'};}
+export default async function Page({params}:{params:Promise<{path:string[]}>}){const{path:p}=await params;if(p.length===1&&['exam','bank','lessons','progress','saved','about'].includes(p[0]))return null;if(p.length===2&&['practice','lessons','methods'].includes(p[0]))return null;notFound();}
