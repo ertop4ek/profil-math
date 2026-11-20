@@ -1,3 +1,17 @@
+# Профиль — тренажёр математики
+
+[Открыть сайт](https://ertop4ek.github.io/profil-math/)
+
+Основная публикация — GitHub Pages. Статическая сборка содержит 2298 задач, подсказки, уроки, локальный прогресс и пробный ЕГЭ.
+
+## Запуск статической версии
+
+Требуется Node.js 24. Выполните npm ci, npm test и npm run build:pages. Для локального просмотра выполните python3 -m http.server 8080 --directory pages-dist и откройте http://localhost:8080/.
+
+Публикация запускается при push в main и вручную через Publish GitHub Pages. Подробности и ограничения находятся в [отчёте](docs/pages-release.md).
+
+## Предыдущая серверная версия
+
 # Профиль — банк задач ЕГЭ-2026
 
 Full web application built with React and Vinext on Cloudflare Workers, with a D1 database. The hosting audience is public, without authentication. The existing mathematics engine, lessons and illustrations remain separate tested modules in `public/client/`.
