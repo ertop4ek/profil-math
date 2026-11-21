@@ -26,10 +26,9 @@ for(const name of ['app.js','catalog.js','lesson-library.js']){
   text=text.slice(0,start)+"function startCloud(){ $('#cloudStatus').textContent='Прогресс хранится на этом устройстве'; }\n"+text.slice(end);
   text=text.replace("$('#syncNow').addEventListener('click',()=>cloud?.synchronize())","$('#syncNow').addEventListener('click',()=>{save();$('#transferStatus').textContent='Сохранено на этом устройстве.';})");
   text=text.replace("location.origin+'/practice/'","window.location.href.split('#')[0]+'#/practice/'");
-  const tutor=text.indexOf('function openTutor(){'),tutorEnd=text.indexOf("$('#openTutor').addEventListener",tutor);
-  text=text.slice(0,tutor)+"function openTutor(){openDialog('Пошаговый ИИ-разбор','<p>ИИ-сервис пока не настроен. Пять подсказок и готовое решение доступны в карточке задания.</p>');}\n"+text.slice(tutorEnd);
+
  }
- text=text.replaceAll('Сервер проверяет итоговый ответ.','Браузер проверяет итоговый ответ.').replaceAll('Прогресс хранится на устройстве и в базе сайта.','Прогресс хранится в этом браузере.').replaceAll('Для браузера создаётся случайная сессия без имени и почты. Без аккаунта другой браузер начинает отдельную практику.','Другой браузер начинает отдельную практику.').replaceAll('ChatGPT работает в отдельной вкладке, где может потребоваться вход.','Интерактивный ИИ-сервис пока не настроен.');
+ text=text.replaceAll('Сервер проверяет итоговый ответ.','Браузер проверяет итоговый ответ.').replaceAll('Прогресс хранится на устройстве и в базе сайта.','Прогресс хранится в этом браузере.').replaceAll('Для браузера создаётся случайная сессия без имени и почты. Без аккаунта другой браузер начинает отдельную практику.','Другой браузер начинает отдельную практику.');
  await writeFile(out+'/client/'+name,text);
 }
 console.log('Static build ready: '+out+', '+tasks.length+' tasks, 19 data sections');

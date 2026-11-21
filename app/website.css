@@ -42,3 +42,26 @@
 @media(max-width:780px){.catalog-filters{grid-template-columns: minmax(0,1fr);}}
 
 .table-scroll{overflow-x:auto;margin:25px 0}table{border-collapse:collapse;width:100%}th,td{text-align:left;padding:12px;border-bottom:1px solid #cad6df}th{font-weight:600}.exam-numbers{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.exam-numbers button{min-width:44px;min-height:44px}.exam-panel{background:white;padding:24px;border:1px solid #cad6df;border-radius:14px}.exam-panel textarea,.exam-panel input{width:100%;padding:12px;margin:10px 0;border:1px solid #718297;border-radius:8px}.exam-panel textarea{min-height:130px}.exam-actions{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
+
+.topic-video {
+  margin-block: 1rem;
+  padding: 1rem;
+  border: 1px solid currentColor;
+  border-radius: 1rem;
+}
+.topic-video summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.topic-video summary:focus-visible,
+.topic-video a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+.topic-video iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  margin-block: 0.75rem;
+}
