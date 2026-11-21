@@ -21,6 +21,7 @@ for(const name of ['app.js','catalog.js','lesson-library.js']){
  let text=await readFile(out+'/client/'+name,'utf8');
  text="import {fetchStatic as fetch,location,history} from './runtime.js';\n"+text;
  if(name==='app.js'){
+  text=text.replace('const accountSession=await readAccountSession();','const accountSession={enabled:false,account:null};');
   text=text.replace("function startCloud(){cloud=createCloud", "function startCloud(){ $('#cloudStatus').textContent='Прогресс хранится на этом устройстве';cloud=createCloud");
   const start=text.indexOf('function startCloud(){'),end=text.indexOf('function applyRoute()',start);
   text=text.slice(0,start)+"function startCloud(){ $('#cloudStatus').textContent='Прогресс хранится на этом устройстве'; }\n"+text.slice(end);

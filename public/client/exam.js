@@ -1,12 +1,12 @@
 import {esc} from './ui-shared.js';
 const key='profile-math-exam-v1';
-export function createExam({tasks,examLines,host,check,solution}){
+export function createExam({storage=window.localStorage,tasks,examLines,host,check,solution}){
  let exam=null,index=0;
  try{
-  const saved=JSON.parse(localStorage.getItem(key));
+  const saved=JSON.parse(storage.getItem(key));
   if(saved?.version===1&&saved.ids?.length===19&&saved.ids.every((id,i)=>tasks.some(t=>t.id===id&&t.ege===i+1)))exam=saved;
  }catch{}
- function save(){try{localStorage.setItem(key,JSON.stringify(exam));}catch{host.querySelector('[role=status]').textContent='Сохранение недоступно. Оставь страницу открытой.';}}
+ function save(){try{storage.setItem(key,JSON.stringify(exam));}catch{host.querySelector('[role=status]').textContent='Сохранение недоступно. Оставь страницу открытой.';}}
  function newExam(){
   exam={version:1,ids:examLines.map(line=>{const list=tasks.filter(t=>t.ege===line.number);return list[Math.floor(Math.random()*list.length)].id;}),startedAt:Date.now(),finishedAt:null,answers:{},working:{},later:{},results:{},checks:{}};
   index=0;save();render();
