@@ -111,8 +111,15 @@ function renderCatalog(){
  $('#catalogTopic').value=catalogFilters.topic;
 
  $('#catalogNumber').value=catalogFilters.ege;$('#catalogLevel').value=catalogFilters.level;$('#catalogStatus').value=catalogFilters.status;$('#catalogSearch').value=catalogFilters.query;
- $('#numberGrid').innerHTML=examLines.map(n=>`<button data-number="${n.number}" aria-pressed="${Number(catalogFilters.ege)===n.number}" title="${esc(n.name)}"><b>${n.number}</b><span>${esc(n.name)}</span></button>`).join('');
- $$('[data-number]').forEach(b=>b.addEventListener('click',()=>{catalogFilters.ege=Number(catalogFilters.ege)===Number(b.dataset.number)?0:Number(b.dataset.number);catalogPage=0;renderCatalog();}));renderCatalogResults();
+ $('#numberGrid').innerHTML=examLines.map(n=>`<button data-number="${n.number}" aria-label="Открыть решение задания №${n.number}. ${esc(n.name)}"><b>${n.number}</b><span>${esc(n.name)}</span></button>`).join('');
+ $('#numberGrid').querySelectorAll('[data-number]').forEach(button=>button.addEventListener('click',()=>{
+  const number=Number(button.dataset.number);
+  const task=tasks.find(item=>item.ege===number);
+  if(!task)return;
+  selectTask(task.id,{resetFilters:true,scroll:true});
+  void revealSolution();
+ }));
+ renderCatalogResults();
 }
 function renderCatalogResults(){const matches=filterTasks({...catalogFilters,records:state.records}).sort((a,b)=>a.ege-b.ege),pages=Math.max(1,Math.ceil(matches.length/pageSize));catalogPage=Math.max(0,Math.min(catalogPage,pages-1));$('#randomGlobal').disabled=matches.length===0;$('#catalogResultCount').textContent=`Найдено: ${matches.length.toLocaleString('ru-RU')} из ${tasks.length.toLocaleString('ru-RU')}`;$('#catalogResults').innerHTML=matches.length?matches.slice(catalogPage*pageSize,(catalogPage+1)*pageSize).map(taskTile).join(''):'<div class="catalog-empty"><h3>Ничего не найдено</h3><p>Попробуй другую тему или сбрось фильтры.</p></div>';$('#catalogPage').textContent=`Страница ${catalogPage+1} из ${pages}`;$('#catalogPrev').disabled=catalogPage===0;$('#catalogNext').disabled=catalogPage>=pages-1;bindTaskLinks($('#catalogResults'));if(view==='catalog' && location.pathname==='/bank')setURL(catalogURL(),true);}
 function showProgress(){
