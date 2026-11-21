@@ -44,9 +44,7 @@ export function deepMethodHTML(method){return `<p>${esc(method.intro)}</p><h3>О
 export function lessonCards(task,allTasks,completed={},query=''){const q=query.toLocaleLowerCase('ru').trim();return lessonsForTask(task,allTasks).filter(l=>!q||`${l.title} ${l.description} ${l.label} ${task.tag}`.toLocaleLowerCase('ru').includes(q)).map((l,i)=>`<button class="lesson-card ${completed[l.id]?'lesson-complete':''}" data-open-lesson="${esc(l.id)}"><span class="lesson-card-top"><span>${esc(l.label)}</span><b>${completed[l.id]?'✓ Изучено':String(i+1).padStart(2,'0')}</b></span><h3>${esc(l.title)}</h3><p>${esc(l.description)}</p><span class="lesson-card-link">Открыть урок</span></button>`).join('');}
 export function sourceCards(task,query=''){const q=query.toLocaleLowerCase('ru').trim();return externalForTask(task).filter(s=>!q||`${s.title} ${s.description} ${s.provider}`.toLocaleLowerCase('ru').includes(q)).map(s=>`<a class="lesson-source" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer"><span class="lesson-source-meta">${esc(s.provider)} · ${esc(s.format)}</span><h3>${esc(s.title)}</h3><p>${esc(s.description)}</p><span>Открыть на сайте автора</span></a>`).join('');}
 
-if(typeof document!=='undefined')document.addEventListener('toggle',async event=>{
- const details=event.target;
- if(!details.matches?.('details[data-example-id]')||!details.open)return;
+export async function loadExampleSolution(details){
  const box=details.querySelector('[data-example-result]');
  if(box.dataset.loaded)return;
  box.textContent='Загружаем разбор…';
@@ -57,4 +55,9 @@ if(typeof document!=='undefined')document.addEventListener('toggle',async event=
   box.innerHTML=list(solution.steps,true)+'<p>Ответ примера — '+esc(solution.answer)+'</p>';
   box.dataset.loaded='true';
  }catch{box.textContent='Загрузка не удалась. Закрой и открой разбор ещё раз.';}
+}
+
+if(typeof document!=='undefined')document.addEventListener('toggle',event=>{
+ const details=event.target;
+ if(details.matches?.('details[data-example-id]')&&details.open)void loadExampleSolution(details);
 },true);

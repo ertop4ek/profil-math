@@ -65,3 +65,34 @@
   border: 0;
   margin-block: 0.75rem;
 }
+
+.lesson-player {
+  margin-block: 1.25rem;
+}
+.lesson-player-screen {
+  display: grid;
+  align-content: center;
+  min-height: 11rem;
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid currentColor;
+  border-radius: 1rem;
+  overflow-wrap: anywhere;
+}
+.lesson-player-screen svg {
+  max-width: 100%;
+  height: auto;
+}
+.lesson-player label {
+  display: grid;
+  gap: 0.25rem;
+  margin-block: 0.75rem;
+}
+.lesson-player input {
+  width: 100%;
+}
+.lesson-player-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
