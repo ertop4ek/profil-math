@@ -58,7 +58,8 @@
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
-.topic-video iframe {
+.topic-video iframe,
+.topic-video video {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
